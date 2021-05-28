@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>Game score</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+	<body>
+		<h1>Game score</h1>
+		<table border="1">
+			<tr id="titleTable">
+				<td></td>
+				<td>Start the game</td>
+			</tr>
+			<tr id="player1">
+				<td>Player 1</td>
+				<td>0</td>
+			</tr>
+			<tr id="player2">
+				<td>Player 2</td>
+				<td>0</td>
+			</tr>
+		</table>
+		<p id="result"></p>
+		<button id="btn1" onclick="calcScore(1)">Player 1</button>
+		<button id="btn2" onclick="calcScore(2)">Player 2</button>
+	
+	<script>
+		var player1 = 0;
+		var player2 = 0;
+		var title = "";
+		var arrPoints = [0,15,30,40,999];
+		function calcScore(point){
+			if (point == 1){
+				const index = (element) => element == player1;
+				player1 = arrPoints[arrPoints.findIndex(index)+1];
+			} else {
+				const index = (element) => element == player2;
+				player2 = arrPoints[arrPoints.findIndex(index)+1];
+			}
+			if ((player1 == 999)||(player2 == 999)){
+				player1 = player2 = 0;
+				document.getElementById("result").innerHTML += "Player "+point+" win the game";
+				$("#btn1").hide();
+				$("#btn2").hide();
+			}
+			document.getElementById("titleTable").innerHTML += "<td>Player "+point+" wins 1 point</td>";
+			document.getElementById("player1").innerHTML += "<td>"+player1+"</td>";
+			document.getElementById("player2").innerHTML += "<td>"+player2+"</td>";
+		}
+	</script>
+	</body>
+</html>
